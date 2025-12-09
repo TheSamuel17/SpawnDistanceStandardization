@@ -5,7 +5,8 @@ Some enemies spawn a little close for comfort, some spawn weirdly far and some c
 Default settings:
 * Jellyfish are set to "Far" on every stage. This is the standard for them, but some stages (e.g. Helminth Hatchery) omit this, which makes them notably harder to react to.
 * Magma & Overloading Worms are set to "Far" on every stage, because I don't like them spawning right underneath me. This is how they're handled in Rallypoint Delta.
-* Beetles are set to "Standard" on every stage. This is for Wetland Aspect specifically; I don't know why they spawn extra far there.
+* Beetles are set to "Standard" on every stage. This is for Wetland Aspect specifically, I don't know why they spawn extra far there.
+* Children are set to "Standard" on every stage. This is for Shattered Abodes specifically, they also spawn extra far there and I don't always feel like chasing after them.
 * Gups are set to "Far" on every stage, to combat their very short and sudden spawning animation.
 * Larvae are set to "Far" on every stage, because fuck them.
 

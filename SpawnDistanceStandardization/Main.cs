@@ -7,7 +7,7 @@ using System.Linq;
 namespace SpawnDistanceStandardization
 {
     // Metadata
-    [BepInPlugin("Samuel17.SpawnDistanceStandardization", "SpawnDistanceStandardization", "1.0.0")]
+    [BepInPlugin("Samuel17.SpawnDistanceStandardization", "SpawnDistanceStandardization", "1.0.1")]
 
     public class Main : BaseUnityPlugin
     {
@@ -18,7 +18,7 @@ namespace SpawnDistanceStandardization
 
         // Config fields
         public static string farSpawns = "GupMaster, JellyfishMaster, AcidLarvaMaster, MagmaWormMaster, ElectricWormMaster";
-        public static string standardSpawns = "BeetleMaster";
+        public static string standardSpawns = "BeetleMaster, ChildMaster";
         public static string closeSpawns = "";
 
         public void Awake()
@@ -28,7 +28,7 @@ namespace SpawnDistanceStandardization
 
             // Load configs
             farSpawns = Config.Bind("Spawn Distances", "Far", "GupMaster, JellyfishMaster, AcidLarvaMaster, MagmaWormMaster, ElectricWormMaster", "Specify the monsters that should be set to Far (70-120m) by entering their internal master names.\nMake sure to separate them with commas.").Value;
-            standardSpawns = Config.Bind("Spawn Distances", "Standard", "BeetleMaster", "Specify the monsters that should be set to Standard (25-40m) by entering their internal master names.\nMake sure to separate them with commas.").Value;
+            standardSpawns = Config.Bind("Spawn Distances", "Standard", "BeetleMaster, ChildMaster", "Specify the monsters that should be set to Standard (25-40m) by entering their internal master names.\nMake sure to separate them with commas.").Value;
             closeSpawns = Config.Bind("Spawn Distances", "Close", "", "Specify the monsters that should be set to Close (8-20m) by entering their internal master names.\nMake sure to separate them with commas.").Value;
 
             // Sort configs
