@@ -7,7 +7,7 @@ Default settings:
 * Magma & Overloading Worms are set to "Far" on every stage, because I don't like them spawning right underneath me. This is how they're handled in Rallypoint Delta.
 * Beetles are set to "Standard" on every stage. This is for Wetland Aspect specifically, I don't know why they spawn extra far there.
 * Children are set to "Standard" on every stage. This is for Shattered Abodes specifically, they also spawn extra far there and I don't always feel like chasing after them.
-* Gups are set to "Far" on every stage, to combat their very short and sudden spawning animation.
+* Blind Vermin & Scorch Worms are set to "Standard" on every stage. This is for Reformed Altar specifically, you get one guess as to why.
 * Larvae are set to "Far" on every stage, because fuck them.
 
 Configs will let you adjust the settings for just about anything that can spawn in the game.

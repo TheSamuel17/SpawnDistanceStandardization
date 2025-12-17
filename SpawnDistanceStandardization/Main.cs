@@ -1,4 +1,5 @@
 using BepInEx;
+using BepInEx.Configuration;
 using RoR2;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,7 @@ using System.Linq;
 namespace SpawnDistanceStandardization
 {
     // Metadata
-    [BepInPlugin("Samuel17.SpawnDistanceStandardization", "SpawnDistanceStandardization", "1.0.1")]
+    [BepInPlugin("Samuel17.SpawnDistanceStandardization", "SpawnDistanceStandardization", "1.0.2")]
 
     public class Main : BaseUnityPlugin
     {
@@ -16,10 +17,13 @@ namespace SpawnDistanceStandardization
         public static List<GameObject> masterPrefabsStandard = new() {};
         public static List<GameObject> masterPrefabsClose = new() {};
 
+        // Fields
+        public static string defaultDistance = null;
+
         // Config fields
-        public static string farSpawns = "GupMaster, JellyfishMaster, AcidLarvaMaster, MagmaWormMaster, ElectricWormMaster";
-        public static string standardSpawns = "BeetleMaster, ChildMaster";
-        public static string closeSpawns = "";
+        public static ConfigEntry<string> farSpawns { get; private set; }
+        public static ConfigEntry<string> standardSpawns { get; private set; }
+        public static ConfigEntry<string> closeSpawns { get; private set; }
 
         public void Awake()
         {
@@ -27,16 +31,16 @@ namespace SpawnDistanceStandardization
             Log.Init(Logger);
 
             // Load configs
-            farSpawns = Config.Bind("Spawn Distances", "Far", "GupMaster, JellyfishMaster, AcidLarvaMaster, MagmaWormMaster, ElectricWormMaster", "Specify the monsters that should be set to Far (70-120m) by entering their internal master names.\nMake sure to separate them with commas.").Value;
-            standardSpawns = Config.Bind("Spawn Distances", "Standard", "BeetleMaster, ChildMaster", "Specify the monsters that should be set to Standard (25-40m) by entering their internal master names.\nMake sure to separate them with commas.").Value;
-            closeSpawns = Config.Bind("Spawn Distances", "Close", "", "Specify the monsters that should be set to Close (8-20m) by entering their internal master names.\nMake sure to separate them with commas.").Value;
+            farSpawns = Config.Bind("Spawn Distances", "Far", "JellyfishMaster, AcidLarvaMaster, MagmaWormMaster, ElectricWormMaster", "Specify the monsters that should be set to Far (70-120m) by entering their internal master names.\nMake sure to separate them with commas.\nAlso accepts EverythingElse as a value.");
+            standardSpawns = Config.Bind("Spawn Distances", "Standard", "BeetleMaster, ChildMaster, VerminMaster, ScorchlingMaster", "Specify the monsters that should be set to Standard (25-40m) by entering their internal master names.\nMake sure to separate them with commas.\nAlso accepts EverythingElse as a value.");
+            closeSpawns = Config.Bind("Spawn Distances", "Close", "", "Specify the monsters that should be set to Close (8-20m) by entering their internal master names.\nMake sure to separate them with commas.\nAlso accepts EverythingElse as a value.");
 
             // Sort configs
             RoR2Application.onLoad += () =>
             {
-                SortConfigs(farSpawns, masterPrefabsFar, "Far");
-                SortConfigs(standardSpawns, masterPrefabsStandard, "Standard");
-                SortConfigs(closeSpawns, masterPrefabsClose, "Close");
+                SortConfigs(farSpawns.Value, masterPrefabsFar, "Far");
+                SortConfigs(standardSpawns.Value, masterPrefabsStandard, "Standard");
+                SortConfigs(closeSpawns.Value, masterPrefabsClose, "Close");
             };    
 
             // Adjust spawn distances
@@ -55,6 +59,11 @@ namespace SpawnDistanceStandardization
                 {
                     listPrefabs.Add(masterPrefab);
                     Log.Message(masterPrefab.name + " has been added to the " + distance + " spawn list.");
+                } 
+                else if (str == "EverythingElse")
+                {
+                    defaultDistance = distance;
+                    Log.Message("Default spawn distance has been set to " + distance + ".");
                 }
             }
         }
@@ -73,6 +82,24 @@ namespace SpawnDistanceStandardization
                     SpawnCard spawnCard = directorCard.GetSpawnCard();
                     if (spawnCard)
                     {
+                        if (defaultDistance != null)
+                        {
+                            switch (defaultDistance)
+                            {
+                                case "Far":
+                                    directorCard.spawnDistance = DirectorCore.MonsterSpawnDistance.Far;
+                                    break;
+
+                                case "Standard":
+                                    directorCard.spawnDistance = DirectorCore.MonsterSpawnDistance.Standard;
+                                    break;
+
+                                case "Close":
+                                    directorCard.spawnDistance = DirectorCore.MonsterSpawnDistance.Close;
+                                    break;
+                            }
+                        }
+                        
                         if (masterPrefabsFar.Contains(spawnCard.prefab)) // Set to "Far"
                         {
                             Log.Message(spawnCard.prefab.name + " spawn distance set to Far.");
