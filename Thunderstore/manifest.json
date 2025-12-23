@@ -1,6 +1,6 @@
 ﻿{
 	"name": "SpawnDistanceStandardization",
-	"version_number": "1.0.2",
+	"version_number": "1.0.3",
 	"website_url": "https://github.com/TheSamuel17/SpawnDistanceStandardization",
 	"description": "Adjusts the spawn distance of certain monsters for consistency and/or balance. Configurable!",
 	"dependencies": [

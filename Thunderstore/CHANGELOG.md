@@ -1,3 +1,7 @@
+## 1.0.3
+
+- Nullref taken care of, shoutouts anartoast.
+
 ## 1.0.2
 
 - Configs now accept `EverythingElse` as an option, if you so desire. Note that the more specific configs will take precedence over `EverythingElse`.

@@ -8,7 +8,7 @@ using System.Linq;
 namespace SpawnDistanceStandardization
 {
     // Metadata
-    [BepInPlugin("Samuel17.SpawnDistanceStandardization", "SpawnDistanceStandardization", "1.0.2")]
+    [BepInPlugin("Samuel17.SpawnDistanceStandardization", "SpawnDistanceStandardization", "1.0.3")]
 
     public class Main : BaseUnityPlugin
     {
@@ -75,6 +75,9 @@ namespace SpawnDistanceStandardization
             // Skip if Void Fields, they're all set to spawn far by default
             if (SceneCatalog.mostRecentSceneDef != SceneCatalog.FindSceneDef("arena"))
             {
+                if (self.monsterSelection == null) return;
+                if (self.monsterSelection.choices == null) return;
+
                 List<MasterCatalog.MasterIndex> list = new List<MasterCatalog.MasterIndex>(self.monsterSelection.choices.Length);
                 for (int i = 0; i < self.monsterSelection.Count; i++)
                 {
