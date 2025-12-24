@@ -1,3 +1,7 @@
+## 1.0.4
+
+- Added a new config that lets you adjust any monster's minimum stage appearance.
+
 ## 1.0.3
 
 - Nullref taken care of, shoutouts anartoast.

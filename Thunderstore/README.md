@@ -12,6 +12,8 @@ Default settings:
 
 Configs will let you adjust the settings for just about anything that can spawn in the game.
 
+BONUS! Configs will also let you set any monster's minimum stage appearance.
+
 ## Mod Compatibility & Recommendations
 
 Enemies with the "Far" setting have a tendency to idle about, because they will often end up out of sight. To combat this, I recommend [TweakAI](https://thunderstore.io/package/Nuxlar/TweakAI/) to allow them to path to you without incident. Besides, I think enemies targeting you more proactively is a neat change in general.
